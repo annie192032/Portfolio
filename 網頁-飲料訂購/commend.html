@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    
+    <link rel="stylesheet" href="./common/css/common.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/commend.css">
+    <script src="./common/js/jquery-1.11.3.min.js">
+    </script>
+    <script src="common/js/jquery-ui.js"></script>
+    <script src="common/js/jquery-ui.min.js"></script>
+    
+    
+<script>
+    $(document).ready(function(){
+        $('a:has(.ttpShow)').mouseover(function(e){
+            $('body').append('<div id="ttpPanel">'+
+                $(this).children('.ttpShow').html()+'</div>');
+            $('#ttpPanel').css({top:(e.pageY+10)+'px',left:(e.pageX+10)+'px'}).fadeIn('fast');
+        }).mousemove(function(e){
+            $('#ttpPanel').css({top:(e.pageY+10)+'px',left:(e.pageX+10)+'px'});
+        }).mouseout(function(){
+            $('#ttpPanel').remove();
+        });
+        
+
+        $(window).load(function(){
+            var thisTicker = $('.ticker'),
+            tickerUl = thisTicker.find('ul'),
+            tickerLl = tickerUl.find('li'),
+            liFirst = tickerUl.find('li:first'),
+            listHeight=tickerLl.height();
+        
+            liFirst.css({top:listHeight,display:'block',opacity:'0',zIndex:'98'}).stop().animate({top:'0',opacity:'1'},500,'linear').addClass('showlist');
+
+            setInterval(function(){
+                var showLi = thisTicker.find('.showlist');
+                showLi.animate({top:-(listHeight),opacity:'0'},500,'linear').next().css({top:listHeight,display:'block',opacity:'0',zIndex:'99'}).animate({top:'0',opacity:'1'},500,'linear').addClass('showlist').end().appendTo(tickerUl).css({zIndex:'98'}).removeClass('showlist');
+            },6000);
+        });
+        
+    });
+       
+</script>
+
+ 
+ <script>
+  $(function() {
+        
+        
+        
+        var $ingre = $( "#ingre" );
+        var $mixdrink = $( "#mixdrink" );
+        
+        
+        //拖曳
+        $( "li", $ingre ).draggable({
+          revert: "invalid",         /*返回位置*/
+          containment: "document",   /*選擇器约束的元素内拖動*/
+          helper: "clone",
+          cursor: "move"
+        });
+
+        
+        $mixdrink.droppable({
+          accept: "#ingre > li",
+          activeClass: "ui-state-highlight",
+          drop: function( event, ui ) {
+            moveImage( ui.draggable );
+          }
+        });
+
+        $ingre.droppable({
+          accept: "#mixdrink li",
+          activeClass: "custom-state-active",
+          drop: function( event, ui ) {/*移動觸發後*/
+            recycleImage( ui.draggable );
+          }
+        });
+        
+        //移動
+        function moveImage( $item ) {
+          $item.fadeOut(function() {
+            var $list = $( "ul", $mixdrink ).length ?
+              $( "ul", $mixdrink) :
+              $( "<ul class='ui-reset'/>" ).appendTo( $mixdrink );
+
+            $item.find( ".ui-mix" ).remove();
+            $item.appendTo( $list ).fadeIn(function() {
+              $item
+                .animate({ width: "100px" })
+                .find( "img" )
+            });
+          });
+        }
+        
+
+        //還原
+        function recycleImage( $item ) {
+          $item.fadeOut(function() {
+            $item
+              /*.find( ".ui-icon-refresh" )*/
+              .find("#reset")
+              .remove()
+              .end()
+              .css( "width", "96px")
+              .find( "img" )
+              .css( "width", "100px" )
+              .end()
+              .appendTo( $ingre )
+              .fadeIn();
+          });
+        }
+      
+        
+      
+      });
+  </script>
+   
+   
+  
+</head>
+
+<body>
+    
+    <div id="container">
+        <div id="logo">
+            <a href="commend.html"><img class="logoimg" src="img/Logo2.png"></a>
+        </div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="commend.html">飲品介紹</a></li>
+                <li><a href="order.html">線上訂購</a></li>
+                
+            </ul>
+        </div>
+        
+        <div id="wrapper">	
+            <div class="ticker">
+                <ul>
+                    <li><a href="#6">今日飲品有優惠  每杯折5元~~</a></li>
+                    <li><a href="#5">滿300元  可外送~~</a></li>
+                    <li><a href="#4">少喝含糖飲料  對身體好~~</a></li>
+                    <li><a href="#3">但可以喝無糖的喔喔喔~~</a></li>
+                    <li><a href="#2">夏季新飲品上市~~</a></li>
+                    <li><a href="#1">滿千送折價券~~</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="drinkmain">
+           <h2 class="h2" style="font-family: Microsoft JhengHei">
+              原料介紹
+            </h2>
+
+            <div id="drink">
+                   
+                    <a href="#">
+                    <div class="view view-first">
+                    <img src="img/tea_green.jpg" width="250" height="250" alt="Greentea">
+                    
+                    <div class="mask">
+                        <h4>清茶系列</h4>
+                        <p>25元</p>
+                    </div>
+                    </div>
+                    <span class="ttpShow">
+                    <p>產品: 文山清茶</p>
+                    <p>產地: 坪林</p>
+                    <p>簡介: 甘醇</p>
+                    <p>熱量: </p>
+                    <li>無糖 0 cal</li>
+                    <li>半糖 60 cal</li>
+                    <li>全糖 210 cal</li>
+                    <p>有減脂及降膽固醇的功能</p>
+                    </span></a>
+                
+                    
+
+                    <a href="#">
+                    <div class="view view-twice">
+                    <img src="img/tea_black.jpg" width="250" height="250" alt="Blacktea">
+                        <div class="mask">
+                            <h4>紅茶系列</h4>
+                            <p>25元</p>
+                        </div>
+                    </div>
+                    <span class="ttpShow">
+                    <p>產品: 錫蘭紅茶</p>
+                    <p>產地: 斯里蘭卡</p>
+                    <p>簡介: 濃烈、香醇</p>
+                    <p>熱量: </p>
+                    <li>無糖 0 cal</li>
+                    <li>半糖 60 cal</li>
+                    <li>全糖 210 cal</li>
+                    <p>有去油膩、幫助胃腸消化、促進食欲的功能</p>
+                    </span>
+                    
+                    </a>
+
+                    
+
+                    <a href="#">
+                    <div class="view view-third">
+                    <img src="img/milk.jpg" width="250" height="250" alt="Milktea">
+                       <div class="mask">
+                            <h4>鮮奶茶系列</h4>
+                            <p>30元</p>
+                        </div>
+                    </div>
+                    <span class="ttpShow">
+                    <p>產品: 鮮奶茶</p>
+                    <p>內容: 錫蘭紅茶 + 瑞穗鮮乳</p>
+                    <p>產地: 斯里蘭卡 ; 花蓮瑞穗</p>
+                    <p>簡介: 濃烈、香醇</p>
+                    <p>熱量: </p>
+                    <li>無糖 150 cal</li>
+                    <li>半糖 250 cal</li>
+                    <li>全糖 350 cal</li>
+                    <p>有調節人體的酸鹼平衡的功能</p>
+                    </span></a>
+
+            </div>
+
+            <div id="thing">  
+
+                    <a href="#"><img src="img/jelly.png" width="100" height="100" alt="Fairy_grass">
+                    <span class="ttpShow">
+                    <p>產品: 仙草</p>
+                    <p>熱量: 35 cal</p>
+                    <p>+ 5 元</p>
+                    </span></a>
+
+                    
+
+                    <a href="#"><img src="img/pearl.png" width="100" height="100" alt="Pearl"><span class="ttpShow">
+                    <p>產品: 珍珠</p>
+                    <p>熱量: 220 cal</p>
+                    <p>+ 5 元</p>
+                    </span></a>
+
+                    
+
+                    <a href="#"><img src="img/pudding.png" width="100" height="100" alt="Pudding">
+                    <span class="ttpShow">
+                    <p>產品: 布丁</p>
+                    <p>熱量: 112 cal</p>
+                    <p>+ 12 元</p>
+                    </span></a>
+
+                    
+
+                    <a href="#"><img src="img/taro_pearl.png" width="100" height="100" alt="Taro"><span class="ttpShow">
+                    <p>產品: 芋圓</p>
+                    <p>熱量: 90 cal</p> 
+                    <p>+ 10 元</p>
+                    </span></a>
+
+             </div> 
+        </div>
+
+         
+
+       
+        <div id="nav">
+            <div class="main ui-helper-clearfix">
+                <h1 style="font-family: Microsoft JhengHei">選擇食材</h1>
+                <ul id="ingre" class="ingre ui-reset ui-helper-clearfix">
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/jelly.png" class="a">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/pearl.png">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/pudding.png">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/taro_pearl.png">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/blacktea.png">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/greentea.png">
+                  </li>
+
+                  <li class="ui-widget-content ui-corner-tr">
+                    <img src="img/milktea.png">
+                  </li>
+                </ul>
+
+                
+        
+            </div>
+            <div id="mixdrink" class="ui-widget-content ui-state-default">
+                <h1><span class="ui-icon ui-mix" style="font-family: Microsoft JhengHei">搭配</span> </h1>
+                
+            </div>
+            <button id="CleanBtn" onclick="location.reload();">清除</button>
+            
+            
+        </div>
+        
+        
+    </div>
+    
+    <script>
+    (function () {
+        $("body").append("<img id='goTopButton' style='display: none; z-index: 5; cursor: pointer;' title='回到頂端'/>");
+        var img = "http://1.bp.blogspot.com/-zMfrIkyhlVs/Uh7FePoKU8I/AAAAAAAAHnA/WA0H_vbWAWc/s1600/go-top.png",
+        locatioin = 1/2, // 按鈕出現在螢幕的高度
+        right = 10, // 距離右邊 px 值
+        opacity = 0.3, // 透明度
+        speed = 500, // 捲動速度
+        $button = $("#goTopButton"),
+        $body = $(document),
+        $win = $(window);
+        $button.attr("src", img);
+        $button.on({
+            mouseover: function() {
+                $button.css("opacity", 1);
+            },
+            mouseout: function() {
+                $button.css("opacity", opacity);
+            },
+            click: function() {
+                $("html, body").animate({scrollTop: 0}, speed);
+            }
+        });
+        window.goTopMove = function () {
+            var scrollH = $body.scrollTop(),
+            winH = $win.height(),
+            css = {"top": winH * locatioin + "px", "position": "fixed", "right": right, "opacity": opacity};
+            if(scrollH > 20) {
+                $button.css(css);
+                $button.fadeIn("slow");
+            } 
+            else {
+                $button.fadeOut("slow");
+            }
+        };
+        $win.on({
+            scroll: function() {goTopMove();},
+            resize: function() {goTopMove();}
+        });
+    } )();
+</script>
+    
+</body>
+</html>

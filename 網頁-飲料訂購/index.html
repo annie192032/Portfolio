@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./common/css/common.css">
+     <link rel="stylesheet" href="./css/index.css">
+    
+    <script src="common/js/jquery-1.11.3.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    
+    <script>
+        var t = 5;
+        function showTime()
+        {
+
+
+            $(".count").text(t).hide();
+            if(t==0)
+            {
+                location.href="commend.html";
+            }
+            else{
+               t--; 
+            }
+            //每秒執行一次
+            setTimeout("showTime()",1000);
+        }
+
+        //執行showTime()
+        showTime();
+    </script>
+    
+</head>
+<body>
+   <div id="loading">
+       <img src="img/pig_climb.gif">
+       <h1 class="txt">
+          <span class="text-wrapper">
+            <span class="line line1"></span>
+            <span class="letters">PP DRINK</span>
+            <span class="line line2"></span>
+          </span>
+        </h1>
+       <div id="loadnum">
+           <span class="progress-loader count"></span>
+           
+       </div>
+   </div>
+   
+    
+</body>
+</html>
